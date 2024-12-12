@@ -1,96 +1,50 @@
-import { defineComponent, reactive, toRefs } from 'vue';
-import LoadingComp from '@/components/loading/index.vue'
+import { defineComponent, onMounted } from 'vue';
+import TextComp from './comps/text-logo/index.vue';
+import Typed from 'typed.js';
+import ButtonComp from './comps/button/index.vue'
+import {useRouter} from 'vue-router'
+import {badgeList} from './constants'
 
 export default defineComponent({
-    components: {
-        LoadingComp
-    },
+	components: {
+		TextComp,
+		ButtonComp
+	},
 	setup() {
-		const state = reactive({
-			data: {
-				name: null, // 项目名称
-				description: null, // 项目描述信息
-				stars: null, // 项目星数
-				url: null, // 项目地址
-				readme: null // 项目的md文件
-			},
-            search: {
-                stars: 1000
-            },
-            isLoading: false
-		});
+		const constants = {
+			badgeList
+		}
+		const router = useRouter()
 
 		const methods = {
-			// 随机获取一个项目
-			async getRandomHighQualityProject() {
-                state.isLoading = true
-				const query = `stars:>${state.search.stars}`; // 查询条件：至少有1000颗星的项目
-				const url = `https://api.github.com/search/repositories?q=${encodeURIComponent(query)}&sort=stars&order=desc`;
-
-				try {
-					const response = await fetch(url);
-					if (!response.ok) {
-						throw new Error('Network response was not ok');
-					}
-					const data = await response.json();
-
-					// 检查是否有结果返回
-					if (data.items && data.items.length > 0) {
-						// 从结果中随机选择一个项目
-						const randomIndex = Math.floor(Math.random() * data.items.length);
-						const project = data.items[randomIndex];
-
-						methods.getProjectReadme(project.full_name).then(readmeData => {
-							state.data.name = project.full_name;
-							state.data.description = project.description;
-							state.data.stars = project.stargazers_count;
-							state.data.url = project.html_url;
-							state.data.readme = readmeData;
-                            state.isLoading = false
-							console.log(state.data);
-						});
-					} else {
-						console.log('No projects found.');
-					}
-				} catch (error) {
-					console.error('There was a problem with the fetch operation:', error);
-				}
+			// 打字机效果
+			typedText(dom) {
+				new Typed(dom, {
+					strings: ['发现宝藏🍪', 'GitHub随机优质项目发现, 或许有你感兴趣的项目哦😚'],
+					typeSpeed: 60,
+					loop: true,
+				});
 			},
-			// 获取这个项目的README文件
-			async getProjectReadme(name: string) {
-				const url = `https://api.github.com/repos/${name}/readme`;
-
-				try {
-					const response = await fetch(url, {
-						headers: {
-							Accept: 'application/vnd.github.VERSION.html' // 请求HTML格式的README
-						}
-					});
-
-					if (!response.ok) {
-						throw new Error('Network response was not ok');
-					}
-
-					const data = await response.text();
-					return data;
-				} catch (error) {
-					console.error('There was a problem with the fetch operation:', error);
-				}
+			// 徽章跳转
+			onJumpLink(url: string){
+				window.open(url)
 			},
-            // 换一个项目
-            changeProject(){
-                methods.getRandomHighQualityProject()
-            },
-            // 跳转项目地址
-            onJumpProject(){
-                window.open(state.data.url)
-            }
+			// 跳转到项目页
+			onChangeProject(){
+				router.push('/project')
+			},
+			// 跳转到该项目的git地址
+			onJumpGithub(){
+				window.open('https://github.com/ConsoleLZ/random-github')
+			}
 		};
 
-		methods.getRandomHighQualityProject();
+		onMounted(() => {
+			methods.typedText('#typedText');
+		});
 
 		return {
-            ...toRefs(state),
+			...constants,
 			...methods
 		};
 	}

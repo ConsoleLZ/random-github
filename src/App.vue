@@ -1,7 +1,11 @@
 <template>
-	<MainPage />
+	<div id="app">
+		<router-view></router-view>
+	</div>
 </template>
 
 <script setup lang="ts">
-import MainPage from '@/pages/main/index.vue';
+import autofit from 'autofit.js'
+
+autofit.init()
 </script>

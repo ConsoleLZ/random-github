@@ -3,14 +3,14 @@
 .loader {
 	--ANIMATION-DELAY-MULTIPLIER: 70ms;
 	padding: 0;
-	margin: 0;
+	margin: 0 auto;
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
 	overflow: hidden;
-    width: 90vw;
-    height: 60vh;
+    width: 100vw;
+    height: 100vh;
 }
 .loader span {
 	padding: 0;
