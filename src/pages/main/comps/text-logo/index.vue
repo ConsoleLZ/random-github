@@ -1,6 +1,6 @@
 <template>
 	<div class="flex-center">
-		<img width="50%" src="@/assets/images/logo.svg" alt="">
+		<img class="logo-img" src="@/assets/images/logo.svg" alt="">
 	</div>
 </template>
 

@@ -94,7 +94,7 @@ export default defineComponent({
 				window.open(state.data.url);
 			},
             onGoHome(){
-				location.href = '/'
+				location.href = import.meta.env.VITE_BASE_URL
 			}
 		};
 

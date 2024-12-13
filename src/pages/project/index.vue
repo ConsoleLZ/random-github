@@ -1,8 +1,8 @@
 <template>
 	<loading-comp v-if="isLoading" />
 	<div v-else>
-		<h3 style="font-size: 30px; padding: 10px">报告船长，已发现宝藏！！🍪</h3>
-		<div class="flex-40 card-list">
+		<h3 style="font-size: 1.5rem; padding: 10px">报告船长，已发现宝藏！！🍪</h3>
+		<div class="card-list">
 			<div v-for="item in data" :key="item">
 				<card-comp :data="item" />
 			</div>

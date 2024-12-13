@@ -1,9 +1,9 @@
 .des {
-	font-size: 25px;
+	font-size: 1rem;
 	font-weight: 700;
 	text-align: center;
 	position: relative;
-	top: -200px;
+	top: -8rem;
 }
 .typed-cursor {
 	position: relative;
@@ -21,9 +21,15 @@
 	position: absolute;
 	bottom: 10px;
 }
+.badge img {
+	height: 2rem;
+}
 .github {
 	position: absolute;
-	top: 10px;
-	right: 10px;
+	top: 5px;
+	right: 5px;
 	cursor: pointer;
+}
+.github img {
+	width: 30px;
 }

@@ -11,14 +11,23 @@ button {
 	position: relative;
 	overflow: hidden;
 	z-index: 100;
+	transform: scale(0.7);
 	transition:
 		box-shadow 250ms,
 		transform 250ms,
 		filter 50ms;
 }
 button:hover {
-	transform: translate(2px, 2px);
+	transform: translate(2px, 2px) scale(0.8);
 	box-shadow: 2px 3px 0px black;
+}
+@media screen and (max-width: 760px) {
+    button {
+        transform: scale(0.5);
+    }
+	button:hover {
+		transform: translate(2px, 2px) scale(0.6);
+	}
 }
 button:active {
 	filter: saturate(0.75);

@@ -1,6 +1,11 @@
 .card-list {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, 365px);
+	gap: 10px; /* 间距 */
 	justify-content: center;
-	margin-top: 100px;
+	margin-top: 20px;
+	padding: 10px;
+	overflow: hidden;
 }
 .btn {
 	--color: #6f6f6c;
@@ -15,7 +20,7 @@
 	cursor: pointer;
 	z-index: 1;
 	font-weight: 600;
-	font-size: 27px;
+	font-size: 1.6rem;
 	font-family: 'Roboto', 'Segoe UI', sans-serif;
 	text-transform: uppercase;
 	color: var(--color);
