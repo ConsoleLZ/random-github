@@ -1,4 +1,6 @@
-export function convertISOToCustomFormat(isoString) {
+import translate from 'translate';
+
+export const convertISOToCustomFormat = isoString => {
 	// 创建一个新的 Date 对象，基于提供的 ISO 8601 字符串
 	const date = new Date(isoString);
 
@@ -17,4 +19,19 @@ export function convertISOToCustomFormat(isoString) {
 
 	// 返回按照指定格式组合的字符串
 	return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-}
+};
+
+// 翻译
+export const translateText = (value: string, language: string = 'zh') => {
+	translate.engine = 'google';
+
+	return new Promise((resolve, reject) => {
+		translate(value, language)
+			.then(data => {
+				resolve(data);
+			})
+			.catch(() => {
+				reject(value);
+			});
+	});
+};

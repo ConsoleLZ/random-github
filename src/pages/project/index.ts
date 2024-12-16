@@ -1,6 +1,7 @@
 import { defineComponent, reactive, toRefs } from 'vue';
 import CardComp from './comps/card/index.vue';
 import LoadingComp from '@/components/loading/index.vue';
+import {translateText} from '@/utils/utils'
 
 export default defineComponent({
 	components: {
@@ -86,6 +87,16 @@ export default defineComponent({
 				} catch (error) {
 					console.error('There was a problem with the fetch operation:', error);
 				}
+			},
+			// 翻译
+			onTranslate(){
+				state.data.forEach(async (item)=>{
+					try {
+						item.description = await translateText(item.description)	
+					} catch (error) {
+						console.log('网络连接超时,翻译失败')
+					}
+				})
 			},
 			// 换一个项目
 			changeProject() {

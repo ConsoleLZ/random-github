@@ -7,11 +7,26 @@
 				<card-comp :data="item" />
 			</div>
 		</div>
-		<div class="flex-center" style="gap: 50px;">
-			<div class="flex-center" @click="changeProject" style="margin-top: 100px">
-				<button class="btn">换一批</button>
-			</div>
-			<div class="flex-center" @click="onGoHome" style="margin-top: 100px"><button class="btn">返回首页</button></div>
+		<div @click="changeProject" class="btn" style="margin-top: 60px">
+			<button class="pushable">
+				<span class="shadow"></span>
+				<span class="edge"></span>
+				<span class="front">换一批</span>
+			</button>
+		</div>
+		<div @click="onTranslate" class="btn" style="margin-top: 20px">
+			<button class="pushable">
+				<span class="shadow"></span>
+				<span class="edge"></span>
+				<span class="front">翻译</span>
+			</button>
+		</div>
+		<div @click="onGoHome" class="btn" style="margin-top: 20px">
+			<button class="pushable">
+				<span class="shadow"></span>
+				<span class="edge"></span>
+				<span class="front">返回首页</span>
+			</button>
 		</div>
 	</div>
 </template>
