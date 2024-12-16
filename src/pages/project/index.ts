@@ -1,11 +1,11 @@
 import { defineComponent, reactive, toRefs } from 'vue';
 import CardComp from './comps/card/index.vue';
-import LoadingComp from '@/components/loading/index.vue'
+import LoadingComp from '@/components/loading/index.vue';
 
 export default defineComponent({
 	components: {
 		CardComp,
-        LoadingComp
+		LoadingComp
 	},
 	setup() {
 		const state = reactive({
@@ -20,8 +20,10 @@ export default defineComponent({
 			// 随机获取项目
 			async getRandomHighQualityProjects() {
 				state.isLoading = true;
-				const query = `stars:>${state.search.stars}`; // 查询条件：至少有1000颗星的项目
-				const url = `https://api.github.com/search/repositories?q=${encodeURIComponent(query)}&sort=stars&order=desc`;
+				const query = `stars:>${state.search.stars}`;
+				// 随机选择一个页面
+				const randomPage = Math.floor(Math.random() * 20) + 1;
+				const url = `https://api.github.com/search/repositories?q=${encodeURIComponent(query)}&sort=stars&order=desc&page=${randomPage}`;
 
 				try {
 					const response = await fetch(url);
@@ -30,8 +32,8 @@ export default defineComponent({
 					}
 					const data = await response.json();
 
-					// 检查是否有结果返回，并且数量足够
-					if (data.items) {
+					// 检查是否有足够的项目可供选择
+					if (data.items && data.items.length > 3) {
 						// 从结果中随机选择三个不同项目
 						const selectedIndices = [];
 						while (selectedIndices.length < 3) {
@@ -53,7 +55,7 @@ export default defineComponent({
 								forks: data.items[index].forks_count,
 								url: data.items[index].html_url,
 								readme: readmes[i],
-                                updateTime: data.items[index].updated_at
+								updateTime: data.items[index].updated_at
 							}));
 							state.isLoading = false;
 						});
@@ -93,12 +95,12 @@ export default defineComponent({
 			onJumpProject() {
 				window.open(state.data.url);
 			},
-            onGoHome(){
-				location.href = import.meta.env.VITE_BASE_URL
+			onGoHome() {
+				location.href = import.meta.env.VITE_BASE_URL;
 			}
 		};
 
-        methods.getRandomHighQualityProjects()
+		methods.getRandomHighQualityProjects();
 
 		return {
 			...toRefs(state),

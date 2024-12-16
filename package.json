@@ -10,6 +10,7 @@
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.vue\" \"src/**/*.css\" \"src/**/*.json\""
   },
   "dependencies": {
+    "translate": "^3.0.1",
     "typed.js": "^2.1.0",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
